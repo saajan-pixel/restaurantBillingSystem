@@ -1,0 +1,10 @@
+<div class="pagination flex justify-content-center mt-3">
+    <div class="flex gap-2 align-items-center">
+      <button mat-button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+      <ng-container *ngFor="let page of pageRange()">
+        <button class="page-btn" [disabled]="currentPage==='...'" mat-button (click)="goToPage(page)" [ngClass]="page === currentPage ?'bg-light':''" [class.current]="page === currentPage">{{ page }}</button>
+      </ng-container>
+      <button mat-button color="primary" (click)="nextPage()"
+        [disabled]="currentPage * itemsPerPage >= lists?.length">Next</button>
+    </div>
+  </div>

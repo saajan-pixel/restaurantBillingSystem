@@ -1,0 +1,273 @@
+{
+  "menuCategory": [
+    {
+      "id": 1,
+      "name": "Main Course"
+    },
+    {
+      "id": 2,
+      "name": "Appetisers"
+    },
+    {
+      "id": 3,
+      "name": "Beverages"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Sriracha-Buffalo Cauliflower Bites",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/nsvs9RaKL0hRgXvaMBGs7r8uMjE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/loaded-smashed-brussels-sprouts-4f5ab837d61d40c8a5bf27a398ca29eb.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Baked Broccoli-Cheddar Quinoa Bites",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/HJIquonawMjzG4icCSOcrWtvsnU=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3749878-dff4534be6114176845f61e0fd0f1c5d.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Zucchini Pizza Bites",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/ylTIAjUvbliWLX6CeyF0v7A4ddY=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8054551-2199559b2cc64046af197b5af66f9643.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Loaded Smashed Brussels Sprouts",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/nsvs9RaKL0hRgXvaMBGs7r8uMjE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/loaded-smashed-brussels-sprouts-4f5ab837d61d40c8a5bf27a398ca29eb.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Chicken Parmesan Dip",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/htrGP2EtHL_yBlc6tpIHiNSonTI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/3879387-02a66c1156964f88bde9c0b3dea7937f.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Coca Cola",
+      "categoryId": 3,
+      "type": "cold drinks",
+      "qty": 1,
+      "price": 50,
+      "img": "https://i5.walmartimages.com/asr/7b673a21-d6e8-4445-a32c-afdcda21b4d8_1.97ecaa927b4f963cee1f015aeadced8a.jpeg"
+    },
+    {
+      "id": 7,
+      "name": "Dew",
+      "price": 100,
+      "categoryId": 3,
+      "type": "cold drinks",
+      "qty": 1,
+      "img": "https://media.naheed.pk/catalog/product/cache/ed9f5ebe2a117625f6cd6336daddd764/1/1/1173909-1.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Fanta",
+      "price": 70,
+      "categoryId": 3,
+      "type": "cold drinks",
+      "qty": 1,
+      "img": "https://dsom-imager-prod.shipt.com/6a3206d4-db06-a2e9-3c85-3f2fd228dd92/54e21a2aa2ad29c73b7e463f3bac632c.jpeg"
+    },
+    {
+      "id": 9,
+      "name": "Sprite",
+      "price": 50,
+      "categoryId": 3,
+      "qty": 1,
+      "type": "cold drinks",
+      "img": "https://pngimg.com/uploads/sprite/sprite_PNG98775.png"
+    },
+    {
+      "id": 10,
+      "name": "Espresso",
+      "price": 500,
+      "categoryId": 3,
+      "type": "coffee",
+      "qty": 1,
+      "img": "https://static.wixstatic.com/media/8da0f0_42243656a4da4d51bd6b375e0b81fd22~mv2.png/v1/fit/w_1000%2Ch_680%2Cal_c/file.png"
+    },
+    {
+      "id": 11,
+      "name": "Cappuccino",
+      "price": 100,
+      "categoryId": 3,
+      "qty": 1,
+      "type": "coffee",
+      "img": "https://pngimg.com/uploads/cappuccino/cappuccino_PNG53.png"
+    },
+    {
+      "id": 12,
+      "name": "Latte Macchiato",
+      "price": 200,
+      "categoryId": 3,
+      "qty": 1,
+      "type": "coffee",
+      "img": "https://cafeco.de/wp-content/uploads/lattemacchiato-glasmithenkel-zucker.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Black Coffee",
+      "price": 50,
+      "categoryId": 3,
+      "type": "coffee",
+      "qty": 1,
+      "img": "https://wallpaperaccess.com/full/1595990.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Gorkha Strong",
+      "price": 350,
+      "categoryId": 3,
+      "type": "beer",
+      "qty": 1,
+      "img": "https://fulltimeexplorer.com/wp-content/uploads/2020/10/nepali-beers-gorka-premium-and-strong.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Arna",
+      "price": 300,
+      "categoryId": 3,
+      "type": "beer",
+      "qty": 1,
+      "img": "http://www.arnabeer.com/wp-content/uploads/2021/07/Arna-premium-3-1.png"
+    },
+    {
+      "id": 16,
+      "name": "Tuborg",
+      "price": 470,
+      "categoryId": 3,
+      "type": "beer",
+      "qty": 1,
+      "img": "https://tuborg.ro/img/products/tuborg-regular-sticla%2bcutie.png"
+    },
+    {
+      "id": 17,
+      "name": "Budwiser",
+      "price": 550,
+      "categoryId": 3,
+      "type": "beer",
+      "qty": 1,
+      "img": "https://thumb.approvedfood.co.uk/thumbs/75/1000/1000/1/src_images/budweiser_beer_300ml_3.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Ballantine's",
+      "price": 500,
+      "categoryId": 3,
+      "type": "Whisky",
+      "qty": 1,
+      "img": "https://ww1.valuecellars.com.au/files/2016/05/5010106113127-1.png"
+    },
+    {
+      "id": 19,
+      "name": "Grant's",
+      "price": 100,
+      "categoryId": 3,
+      "type": "Whisky",
+      "qty": 1,
+      "img": "https://www.connosr.com/image/2/1000/0/5/uploads/community/images/reviews/Grants-Family-Reserve-1494852982731.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Chivas Regal",
+      "price": 200,
+      "categoryId": 3,
+      "type": "Whisky",
+      "qty": 1,
+      "img": "https://www.whiskyflavour.com/wp-content/uploads/2016/11/whisky-flavour-chivas-regal-12-years.jpeg"
+    },
+    {
+      "id": 21,
+      "name": "Johnnie Walker",
+      "price": 50,
+      "categoryId": 3,
+      "type": "Whisky",
+      "qty": 1,
+      "img": "https://http2.mlstatic.com/whisky-johnnie-walker-black-label-12-anos-1l-original-D_NQ_NP_942701-MLB20371894185_082015-F.jpg"
+    },
+    {
+      "id": 22,
+      "name": "Quick Potato Gnocchi",
+      "price": 590,
+      "categoryId": 1,
+      "qty": 1,
+      "img": "https://assets.epicurious.com/photos/60ba3e2749076eeb52dfae3d/1:1/w_1920%2Cc_limit/PotatoFlakeGnocchi_RECIPE_060221_17008.jpg"
+    },
+    {
+      "id": 23,
+      "name": "Classic Sole Meunière",
+      "price": 590,
+      "categoryId": 1,
+      "qty": 1,
+      "img": "https://assets.epicurious.com/photos/645a50f742d457037e529b60/1:1/w_1920%2Cc_limit/20230426-EPICURIOUS-cc26181-LEDE.jpg"
+    },
+    {
+      "id": 24,
+      "name": "Habanero BBQ Shrimp",
+      "price": 590,
+      "qty": 1,
+      "categoryId": 1,
+      "img": "https://assets.epicurious.com/photos/5f2333d0841506e1b11da70b/1:1/w_1920%2Cc_limit/ShrimpSkewers_RECIPE_072920_10116.jpg"
+    },
+    {
+      "id": 25,
+      "name": "Caesar Salad Roast Chicken",
+      "price": 590,
+      "categoryId": 1,
+      "qty": 1,
+      "img": "https://assets.epicurious.com/photos/5f8e0436eb27e3e71e94dd98/1:1/w_1920%2Cc_limit/caesar-salad-roast-chicken-recipe-BA-101920.jpg"
+    },
+    {
+      "id": 26,
+      "name": "Gado Gado",
+      "price": 590,
+      "categoryId": 1,
+      "qty": 1,
+      "img": "https://assets.epicurious.com/photos/60d0baca2162cdf71bb2d8db/1:1/w_1920%2Cc_limit/GadoGado_RECIPE_061721_18121.jpg"
+    }
+  ],
+  "menuItems": [
+    {
+      "id": 1,
+      "name": "Sriracha-Buffalo Cauliflower Bites",
+      "categoryId": 2,
+      "price": 5000,
+      "qty": 1,
+      "img": "https://www.eatingwell.com/thmb/nsvs9RaKL0hRgXvaMBGs7r8uMjE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/loaded-smashed-brussels-sprouts-4f5ab837d61d40c8a5bf27a398ca29eb.jpg",
+      "subTotal": 5000
+    },
+    {
+      "id": 7,
+      "name": "Dew",
+      "price": 100,
+      "categoryId": 3,
+      "type": "cold drinks",
+      "qty": 1,
+      "img": "https://media.naheed.pk/catalog/product/cache/ed9f5ebe2a117625f6cd6336daddd764/1/1/1173909-1.jpg",
+      "subTotal": 100
+    },
+    {
+      "id": 6,
+      "name": "Coca Cola",
+      "categoryId": 3,
+      "type": "cold drinks",
+      "qty": 1,
+      "price": 50,
+      "img": "https://i5.walmartimages.com/asr/7b673a21-d6e8-4445-a32c-afdcda21b4d8_1.97ecaa927b4f963cee1f015aeadced8a.jpeg",
+      "subTotal": 50
+    }
+  ]
+}

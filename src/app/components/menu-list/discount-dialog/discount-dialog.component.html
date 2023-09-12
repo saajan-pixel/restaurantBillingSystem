@@ -1,0 +1,33 @@
+<div mat-dialog-content>
+  <h4 class="fw-bold"> {{menuItem.name}}</h4>
+
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-6">
+      <div class="discount-amount">
+        <label>Discount Amount</label>
+        <input type="number" [(ngModel)]="discountAmount" (input)="calculateDiscountPercent()"
+          class="form-control mt-2" min="0">
+      </div>
+
+      <div class="discount-percent mt-3">
+        <label>Discount Percent</label>
+        <input type="number" [(ngModel)]="discountPercent" (input)="calculateDiscountAmount()"
+          class="form-control mt-2" min="0">
+      </div>
+
+    </div>
+    <div class="col-12 col-md-12 col-lg-6 mt-4 mt-lg-0">
+      <div class="image mb-2">
+        <img class="menu-img" src="{{menuItem.img}}" alt="">
+      </div>
+
+      <div>{{menuItem.name}}</div>
+      <div class="price my-2">Rs {{menuItem.price?.toLocaleString()}}</div>
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="update()">Save</button>
+</div>
