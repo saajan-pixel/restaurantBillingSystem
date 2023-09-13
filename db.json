@@ -258,16 +258,6 @@
       "qty": 1,
       "img": "https://media.naheed.pk/catalog/product/cache/ed9f5ebe2a117625f6cd6336daddd764/1/1/1173909-1.jpg",
       "subTotal": 100
-    },
-    {
-      "id": 6,
-      "name": "Coca Cola",
-      "categoryId": 3,
-      "type": "cold drinks",
-      "qty": 1,
-      "price": 50,
-      "img": "https://i5.walmartimages.com/asr/7b673a21-d6e8-4445-a32c-afdcda21b4d8_1.97ecaa927b4f963cee1f015aeadced8a.jpeg",
-      "subTotal": 50
     }
   ]
 }

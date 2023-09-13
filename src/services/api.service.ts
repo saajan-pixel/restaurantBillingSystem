@@ -8,7 +8,7 @@ import {  Observable, catchError, shareReplay } from 'rxjs';
 export class ApiService {
 
   private cachedData$!: Observable<any>;
-  apiUrl=" http://localhost:3000"
+  apiUrl="https://rbsapi-4zn3.onrender.com"
 
   constructor(private http:HttpClient) { }
 
