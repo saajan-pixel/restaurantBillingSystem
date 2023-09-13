@@ -245,19 +245,9 @@
       "name": "Sriracha-Buffalo Cauliflower Bites",
       "categoryId": 2,
       "price": 5000,
-      "qty": 1,
+      "qty": 15,
       "img": "https://www.eatingwell.com/thmb/nsvs9RaKL0hRgXvaMBGs7r8uMjE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/loaded-smashed-brussels-sprouts-4f5ab837d61d40c8a5bf27a398ca29eb.jpg",
       "subTotal": 5000
-    },
-    {
-      "id": 7,
-      "name": "Dew",
-      "price": 100,
-      "categoryId": 3,
-      "type": "cold drinks",
-      "qty": 1,
-      "img": "https://media.naheed.pk/catalog/product/cache/ed9f5ebe2a117625f6cd6336daddd764/1/1/1173909-1.jpg",
-      "subTotal": 100
     }
   ]
 }

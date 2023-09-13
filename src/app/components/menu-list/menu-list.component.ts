@@ -1,13 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { first, switchMap } from 'rxjs';
+import { finalize, first, switchMap, timer } from 'rxjs';
 import { ApiService } from 'src/services/api.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { DiscountDialogComponent } from './discount-dialog/discount-dialog.component';
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-menu-list',
@@ -16,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MenuListComponent implements OnInit {
   itemsPerPage: number = 16;
-  menuItems: any;
+  menuItems: any[] = [];
   pagedMenuItems: any;
   form!: FormGroup;
   total = 0;
@@ -28,7 +31,8 @@ export class MenuListComponent implements OnInit {
     private _apiService: ApiService,
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private store: Store<{ menuItem: { menuItem: {} } }>
+    private store: Store<{ menuItem: { menuItem: {} } }>,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -59,13 +63,18 @@ export class MenuListComponent implements OnInit {
     this.calculateTotal();
   }
 
-  getMenuItems(): void {
+  getMenuItems(discountAdded?: boolean): void {
+    this.menuItems = [];
+    this.spinner.show();
     this._apiService
       .fetchAddedMenuItems()
       .pipe(
         first(),
+        finalize(() => this.spinner.hide()),
         switchMap((res) => {
           this.menuItems = res;
+          this.calculateTotal();
+          this.calculateTotalDiscountAmount();
           if (!this.isRemoved) {
             return this.store.select('menuItem');
           } else {
@@ -75,7 +84,7 @@ export class MenuListComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          if (res) {
+          if (res && !discountAdded) {
             this.updateMenuItems(res);
           }
         },
@@ -86,20 +95,19 @@ export class MenuListComponent implements OnInit {
   }
   calculateTotal() {
     this.total = this.menuItems.reduce(
-      (acc: number, item: any) => acc + item.subTotal * item.qty,
+      (acc: number, item: any) => acc + item.price * item.qty,
       0
     );
-    this.calculateDiscountPrice();
+    this.calculateNetPrice();
   }
 
   calculateTotalDiscountAmount() {
-    // const totalPrice = this.menuItems.reduce(
-    //   (acc: number, item: any) => acc + item.price,
-    //   0
-    // );
+    const subTotal = this.menuItems.reduce(
+      (acc: number, item: any) => acc + item.subTotal,
+      0
+    );
 
-    console.log(this.total);
-    // this.discountAmount = totalPrice - this.total;
+    this.discountAmount = this.total - subTotal;
   }
 
   onPagedMenuItemsReceived(pagedItems: any[]) {
@@ -111,14 +119,31 @@ export class MenuListComponent implements OnInit {
     this.total = data.qty * data.subTotal + this.total;
   }
 
-  calculateDiscountPrice() {
-    this.netPrice = this.total - this.discountAmount;
+  calculateNetPrice() {
+    if (this.discountAmount !== 0) {
+      const amount = this.total - this.discountAmount;
+      console.log('aaa', amount);
+      this.netPrice = amount + (amount * this.tax) / 100;
+    } else {
+      this.netPrice = this.total + (this.total * this.tax) / 100;
+    }
   }
 
-  openDialog(item: any): void {
-    this.dialog.open(DiscountDialogComponent, {
+  openDialog(item: any, index: number): void {
+    if (item.subTotal !== this.menuItems[index].price) {
+      this.toastr.info('Discount for this item has been already provided !!','Info')
+      return
+    }
+
+    const dialogRef = this.dialog.open(DiscountDialogComponent, {
       width: '50%',
       data: item,
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      timer(2000)
+        .pipe(first())
+        .subscribe(() => this.getMenuItems(true));
     });
   }
 

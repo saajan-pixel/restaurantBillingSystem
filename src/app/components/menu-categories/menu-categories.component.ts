@@ -6,8 +6,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
+import { finalize, first } from 'rxjs';
 import { retrieveMenuItems } from 'src/app/store/menuItem.action';
 import { ApiService } from 'src/services/api.service';
 
@@ -35,6 +36,7 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
     private store: Store<{ menuItems: { menuItems: {} } }>,
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
+    private spinner:NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -108,10 +110,10 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
 
     // dispatching menuItem from MenuCategory
     this.store.dispatch(retrieveMenuItems({ value: item }));
-
+    this.spinner.show()
     this._apiService
       .addToMenuItems(item)
-      .pipe(first())
+      .pipe(first(),finalize(()=> this.spinner.hide()))
       .subscribe({
         next: () => {
           this.getMenuItems();

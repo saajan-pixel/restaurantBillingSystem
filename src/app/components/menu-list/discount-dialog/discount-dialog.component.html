@@ -5,14 +5,14 @@
     <div class="col-12 col-md-12 col-lg-6">
       <div class="discount-amount">
         <label>Discount Amount</label>
-        <input type="number" [(ngModel)]="discountAmount" (input)="calculateDiscountPercent()"
+        <input type="number" [(ngModel)]="discountAmount"  (input)="calculateDiscountPercent()"
           class="form-control mt-2" min="0">
       </div>
 
       <div class="discount-percent mt-3">
         <label>Discount Percent</label>
         <input type="number" [(ngModel)]="discountPercent" (input)="calculateDiscountAmount()"
-          class="form-control mt-2" min="0">
+          class="form-control mt-2" min="0" max="100">
       </div>
 
     </div>
@@ -29,5 +29,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="update()">Save</button>
+  <button [disabled]="discountValidation" mat-button mat-dialog-close cdkFocusInitial (click)="update()">Save</button>
 </div>

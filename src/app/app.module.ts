@@ -30,6 +30,7 @@ import { PaginationComponent } from './utils/pagination/pagination.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DiscountDialogComponent } from './components/menu-list/discount-dialog/discount-dialog.component';
 import { retrieveMenuItemsReducer } from './store/menuItem.reducer';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const MaterialModule = [
   MatToolbarModule,
@@ -62,6 +63,7 @@ const MaterialModule = [
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ menuItem: retrieveMenuItemsReducer }),

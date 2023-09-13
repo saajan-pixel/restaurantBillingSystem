@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 import { ApiService } from 'src/services/api.service';
 
@@ -12,40 +13,61 @@ import { ApiService } from 'src/services/api.service';
 })
 export class DiscountDialogComponent implements OnInit {
   menuItem: any = {};
-  discountAmount = 0;
-  discountPercent = 0;
+  discountAmount!: number;
+  discountPercent!: number;
+
   constructor(
     public dialogRef: MatDialogRef<DiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _apiService:ApiService
+    private _apiService: ApiService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    console.log(this.discountAmount);
     this.menuItem = this.data;
   }
 
+  get discountValidation() {
+    return (
+      (this.discountAmount === undefined || this.discountAmount === 0) &&
+      (this.discountPercent === undefined || this.discountAmount === 0)
+    );
+  }
+
   calculateDiscountPercent() {
-    this.discountPercent =
-      (this.discountAmount / this.menuItem.price) * 100;
+    if (this.discountAmount > this.menuItem.price) {
+      this.discountAmount = 0;
+    }
+
+    this.discountPercent = (this.discountAmount / this.menuItem.price) * 100;
   }
 
   calculateDiscountAmount() {
-    this.discountAmount =
-      (this.discountPercent * this.menuItem.price) / 100;
+    if (this.discountPercent > 100) {
+      this.discountPercent = 0;
+    }
+
+    this.discountAmount = (this.discountPercent * this.menuItem.price) / 100;
   }
 
-  update(){
+  update() {
+    this.spinner.show();
+    const discountAmount = this.menuItem.price - this.discountAmount;
+    const data = {
+      ...this.menuItem,
+      subTotal: discountAmount,
+      isDiscounted: true,
+    };
 
-    const data={...this.menuItem,subTotal: this.menuItem.price- this.discountAmount,isDiscounted:true}
-    console.log(data)
-    debugger
-
-    this._apiService.updateMenuItem(this.menuItem.id,data).pipe(first()).subscribe({
-      next:()=>{
-
-      },error:(error:HttpErrorResponse)=>{
-        throw error
-      }
-    })
+    this._apiService
+      .updateMenuItem(this.menuItem.id, data)
+      .pipe(first())
+      .subscribe({
+        next: () => {},
+        error: (error: HttpErrorResponse) => {
+          throw error;
+        },
+      });
   }
 }

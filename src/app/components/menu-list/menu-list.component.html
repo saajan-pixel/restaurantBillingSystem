@@ -2,7 +2,7 @@
   <div class="header fs-5 fw-medium">Menu Items</div>
 
   <div class="table-responsive mt-4">
-    <table class="table" *ngIf="menuItems?.length > 0">
+    <table class="table" *ngIf="menuItems.length > 0">
       <thead>
         <tr>
           <th scope="col" style="min-width: 200px;">Item</th>
@@ -16,7 +16,7 @@
       </thead>
       <tbody>
           <tr *ngFor="let item of menuItems;index as i">
-            <td (click)="openDialog(item)" class="cursor-pointer menu-name"> {{item.name}}</td>
+            <td (click)="openDialog(item,i)" class="cursor-pointer menu-name"> {{item.name}}</td>
             <td>{{item.qty}}</td>
             <td>Rs {{item.price.toLocaleString()}}</td>
             <td> Rs {{(item.isDiscounted ? item.subTotal : item.qty * item.price).toLocaleString()}}</td>
