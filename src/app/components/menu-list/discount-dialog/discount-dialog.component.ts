@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
+import { MenuItem } from 'src/app/interface/interfaces';
 import { ApiService } from 'src/services/api.service';
 
 @Component({
@@ -53,10 +54,10 @@ export class DiscountDialogComponent implements OnInit {
 
   update() {
     this.spinner.show();
-    const discountAmount = this.menuItem.price - this.discountAmount;
-    const data = {
+    const subTotalAfterDiscount = this.menuItem.price - this.discountAmount;
+    const data:MenuItem = {
       ...this.menuItem,
-      subTotal: discountAmount,
+      subTotal: subTotalAfterDiscount,
       isDiscounted: true,
     };
 

@@ -11,6 +11,12 @@ import { DiscountDialogComponent } from './discount-dialog/discount-dialog.compo
 import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MenuItem } from 'src/app/interface/interfaces';
+
+interface FormItem {
+  qty: number;
+  subTotal: string; 
+}
 
 @Component({
   selector: 'app-menu-list',
@@ -19,13 +25,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class MenuListComponent implements OnInit {
   itemsPerPage: number = 16;
-  menuItems: any[] = [];
-  pagedMenuItems: any;
+  menuItems: MenuItem[] = [];
+  pagedMenuItems: MenuItem[]=[];
   form!: FormGroup;
   total = 0;
   discountAmount = 0;
   netPrice = 0;
-  tax = 13;
+  tax = 10;
   isRemoved = false;
   constructor(
     private _apiService: ApiService,
@@ -38,14 +44,15 @@ export class MenuListComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getMenuItems();
+    console.log("menu list component")
   }
 
-  createForm(item: any = {}) {
+  createForm(item?: FormItem) {
     this.form = new FormGroup({
       arr: new FormArray([
         new FormGroup({
-          qty: new FormControl(item.qty),
-          subTotal: new FormControl(`Rs ${item.subTotal}`), // Provide an initial value here if needed
+          qty: new FormControl(item?.qty),
+          subTotal: new FormControl(`Rs ${item?.subTotal}`), // Provide an initial value here if needed
         }),
       ]),
     });
@@ -74,7 +81,7 @@ export class MenuListComponent implements OnInit {
         switchMap((res) => {
           this.menuItems = res;
           this.calculateTotal();
-          this.calculateTotalDiscountAmount();
+  
           if (!this.isRemoved) {
             return this.store.select('menuItem');
           } else {
@@ -93,12 +100,15 @@ export class MenuListComponent implements OnInit {
         },
       });
   }
+
   calculateTotal() {
     this.total = this.menuItems.reduce(
       (acc: number, item: any) => acc + item.price * item.qty,
       0
     );
-    this.calculateNetPrice();
+
+    this.calculateTotalDiscountAmount();
+
   }
 
   calculateTotalDiscountAmount() {
@@ -108,6 +118,8 @@ export class MenuListComponent implements OnInit {
     );
 
     this.discountAmount = this.total - subTotal;
+
+    this.calculateNetPrice();
   }
 
   onPagedMenuItemsReceived(pagedItems: any[]) {

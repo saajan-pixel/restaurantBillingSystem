@@ -36,12 +36,13 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
     private store: Store<{ menuItems: { menuItems: {} } }>,
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
-    private spinner:NgxSpinnerService
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
     this.getItems();
     this.getMenuItems();
+    console.log('menu categories component');
   }
 
   ngAfterContentChecked() {
@@ -99,26 +100,23 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
 
   addToMenu(menuItem: any) {
     const item = { ...menuItem, subTotal: menuItem.price };
-    const isItemAddedInMenuList = this.addedMenuItems?.some(
-      (item: any) => item.id === menuItem.id
-    );
-
-    if (isItemAddedInMenuList) {
-      this.toastr.info('Item is already added in Menu List !!', 'Info');
-      return;
-    }
-
-    // dispatching menuItem from MenuCategory
-    this.store.dispatch(retrieveMenuItems({ value: item }));
-    this.spinner.show()
+    this.spinner.show();
     this._apiService
       .addToMenuItems(item)
-      .pipe(first(),finalize(()=> this.spinner.hide()))
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      )
       .subscribe({
         next: () => {
+          // dispatching menuItem from MenuCategory
+          this.store.dispatch(retrieveMenuItems({ value: item }));
           this.getMenuItems();
         },
         error: (error: HttpErrorResponse) => {
+          if(error.status===500){
+            this.toastr.info('Item is already added in Menu List !!', 'Info');
+          }
           throw error;
         },
       });

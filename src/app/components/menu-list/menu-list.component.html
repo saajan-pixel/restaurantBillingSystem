@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th scope="col" style="min-width: 200px;">Item</th>
-          <th scope="col">Qty</th>
+          <th scope="col" style="width: 100px;">Qty</th>
           <th scope="col" style="min-width: 120px;">Price</th>
           <th scope="col" style="min-width: 120px;">Sub Total</th>
           <th scope="col">
@@ -15,22 +15,25 @@
         </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let item of menuItems;index as i">
-            <td (click)="openDialog(item,i)" class="cursor-pointer menu-name"> {{item.name}}</td>
-            <td>{{item.qty}}</td>
-            <td>Rs {{item.price.toLocaleString()}}</td>
-            <td> Rs {{(item.isDiscounted ? item.subTotal : item.qty * item.price).toLocaleString()}}</td>
-            <td>
-              <div class="d-flex justify-content-center text-danger fs-4 cursor-pointer" (click)="removeMenuItem(item.id,i)">x</div>
-            </td>
-          </tr>
+        <tr *ngFor="let item of menuItems;index as i">
+          <td (click)="openDialog(item,i)" class="cursor-pointer menu-name"> {{item.name}}</td>
+          <td>
+            <input class="form-control form-control-sm" type="number" min="1" [(ngModel)]="item.qty" (input)="(item.subTotal=item.qty * item.price);calculateTotal()">
+          </td>
+          <td>Rs {{item.price.toLocaleString()}}</td>
+          <td> Rs {{(item.isDiscounted ? item.subTotal : item.qty * item.price).toLocaleString()}}</td>
+          <td>
+            <div class="d-flex justify-content-center text-danger fs-4 cursor-pointer"
+              (click)="removeMenuItem(item.id,i)">x</div>
+          </td>
+        </tr>
       </tbody>
 
       <tbody>
-        <td  class="tbody-td">Total Qty</td>
+        <td class="tbody-td">Total Qty</td>
         <td></td>
         <td></td>
-        <td class="tbody-td">{{menuItems?.length}}</td>
+        <td class="tbody-td">{{menuItems.length}}</td>
       </tbody>
 
       <tbody>
