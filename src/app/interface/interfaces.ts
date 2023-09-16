@@ -4,13 +4,13 @@ export interface ItemList{
     name:string,
     qty:number,
     price:number,
-    img:URL
+    img:URL,
+    discountAmount:number,
 }
 
 export interface MenuItem extends ItemList{
     subTotal:number,
     isDiscounted?:boolean,
-    discountAmount:number,
     discountPercent:number
 
 }

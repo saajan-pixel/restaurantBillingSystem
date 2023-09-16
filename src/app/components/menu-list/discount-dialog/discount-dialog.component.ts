@@ -21,7 +21,7 @@ export class DiscountDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DiscountDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: MenuItem,
     private _apiService: ApiService,
     private spinner: NgxSpinnerService,
   ) {
@@ -39,7 +39,7 @@ export class DiscountDialogComponent implements OnInit {
   update() {
     this.spinner.show();
     this.saveClicked.emit(true)
-    const subTotalAfterDiscount = this.menuItem.price - this.discountAmount;
+    const subTotalAfterDiscount = this.menuItem.subTotal - this.discountAmount;
     const data:MenuItem = {
       ...this.menuItem,
       subTotal: subTotalAfterDiscount,

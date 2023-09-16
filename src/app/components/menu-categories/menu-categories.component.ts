@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, first } from 'rxjs';
+import { ItemList, MenuItem } from 'src/app/interface/interfaces';
 import { retrieveMenuItems } from 'src/app/store/menuItem.action';
 import { ApiService } from 'src/services/api.service';
 
@@ -18,18 +19,16 @@ import { ApiService } from 'src/services/api.service';
   styleUrls: ['./menu-categories.component.scss'],
 })
 export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
-  allMenuItems: any;
-  mainCoursesItems: any;
-  pagedMainCoursesItems: any;
-  appeitizerItems: any;
-  beverageItems: any;
-  pagedMenuItems: any;
-  itemsOfMenu: any[] = [];
-  pagedAppeitizerItems: any;
-  pagedBeverageItems: any;
+  allMenuItems!: ItemList[];
+  mainCoursesItems!: ItemList[];
+  pagedMainCoursesItems!: ItemList[];
+  appeitizerItems!: ItemList[];
+  beverageItems!: ItemList[];
+  pagedMenuItems!: ItemList[];
+  itemsOfMenu!: ItemList[];
+  pagedAppeitizerItems!: ItemList[];
+  pagedBeverageItems!: ItemList[];
   itemsPerPage = 6;
-
-  addedMenuItems: any;
 
   constructor(
     private _apiService: ApiService,
@@ -41,10 +40,12 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.getItems();
-    this.getMenuItems();
-    console.log('menu categories component');
   }
 
+  /**
+   * The ngAfterContentChecked function in TypeScript is used to detect changes in the content of a
+   * component and trigger change detection.
+   */
   ngAfterContentChecked() {
     this.cdr.detectChanges();
   }
@@ -66,40 +67,26 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
       });
   }
 
-  getMenuItems() {
-    this._apiService
-      .fetchAddedMenuItems()
-      .pipe(first())
-      .subscribe({
-        next: (res) => {
-          this.addedMenuItems = res;
-        },
-        error: (error: HttpErrorResponse) => {
-          throw error;
-        },
-      });
-  }
-
   getMainCourses() {
     this.mainCoursesItems = this.allMenuItems.filter(
-      (item: any) => item.categoryId === 1
+      (item) => item.categoryId === 1
     );
   }
 
   getAppeitizerItems() {
     this.appeitizerItems = this.allMenuItems.filter(
-      (item: any) => item.categoryId === 2
+      (item) => item.categoryId === 2
     );
   }
 
   getBeverageItems() {
     this.beverageItems = this.allMenuItems.filter(
-      (item: any) => item.categoryId === 3
+      (item) => item.categoryId === 3
     );
   }
 
-  addToMenu(menuItem: any) {
-    const item = { ...menuItem, subTotal: menuItem.price,discountAmount:0 };
+  addToMenu(itemList: ItemList) {
+    const item = { ...itemList, subTotal: itemList.price, discountAmount: 0 };
     this.spinner.show();
     this._apiService
       .addToMenuItems(item)
@@ -111,10 +98,11 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
         next: () => {
           // dispatching menuItem from MenuCategory
           this.store.dispatch(retrieveMenuItems({ value: item }));
-          this.getMenuItems();
+          // this.getMenuItems();
         },
         error: (error: HttpErrorResponse) => {
-          if(error.status===500){
+          if (error.status === 500) {
+            itemList.qty = 1;
             this.toastr.info('Item is already added in Menu List !!', 'Info');
           }
           throw error;
@@ -122,7 +110,7 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
       });
   }
 
-  onPagedMenuItemsReceived(pagedItems: any[], type: string) {
+  onPagedMenuItemsReceived(pagedItems: ItemList[], type: string) {
     // Handle the pagedMenuItems data received from the child component here
     if (type === 'all') {
       this.pagedMenuItems = pagedItems;
@@ -135,11 +123,11 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  incrementQty(item: any) {
+  incrementQty(item: ItemList) {
     item.qty += 1;
   }
 
-  decrementQty(item: any) {
+  decrementQty(item: ItemList) {
     if (item.qty > 1) {
       item.qty -= 1;
     }

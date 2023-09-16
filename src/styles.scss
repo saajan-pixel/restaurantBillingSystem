@@ -10,6 +10,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     cursor: pointer;
 }
 
+.menu-item{
+    padding: 10px;
+    &:hover{
+        box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    }
+
+    .menu-img{
+        width: 100%;
+        max-height: 250px;
+    }
+
+  
+}
+.h-850{
+    height: 935px;
+}
+
 
 .common{
     font-size: 19px;
@@ -24,4 +41,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .minus{
     color: red;
+}
+
+
+.tbody-td{
+    padding-left: 9px;
+    padding-top: 15px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: black;
 }

@@ -32,6 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DiscountDialogComponent } from './components/menu-list/discount-dialog/discount-dialog.component';
 import { retrieveMenuItemsReducer } from './store/menuItem.reducer';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { OrderSummaryComponent } from './components/menu-list/order-summary/order-summary.component';
+import { SuccessfulOrderComponent } from './pages/successful-order/successful-order.component';
+import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 
 const MaterialModule = [
   MatToolbarModule,
@@ -54,6 +57,9 @@ const MaterialModule = [
     MenuCategoriesComponent,
     PaginationComponent,
     DiscountDialogComponent,
+    OrderSummaryComponent,
+    SuccessfulOrderComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,

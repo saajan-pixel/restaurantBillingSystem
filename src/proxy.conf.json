@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://rbsapi-4zn3.onrender.com",
+        "secure": false
+    }
+}

@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MenuItem } from 'src/app/interface/interfaces';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 interface FormItem {
   qty: number;
   subTotal: string;
@@ -40,7 +41,7 @@ export class MenuListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private mediaMatcher: MediaMatcher
   ) {
-    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)'); // Adjust the breakpoint as needed
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)');
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class MenuListComponent implements OnInit {
       arr: new FormArray([
         new FormGroup({
           qty: new FormControl(item?.qty),
-          subTotal: new FormControl(`Rs ${item?.subTotal}`), // Provide an initial value here if needed
+          subTotal: new FormControl(`Rs ${item?.subTotal}`),
         }),
       ]),
     });
@@ -182,7 +183,11 @@ export class MenuListComponent implements OnInit {
       this.actionInfo();
       return;
     }
-    const updatedItem = { ...item, qty: item.qty + 1, subTotal: (item.qty + 1) * item.price };
+    const updatedItem = {
+      ...item,
+      qty: item.qty + 1,
+      subTotal: (item.qty + 1) * item.price,
+    };
     this.menuItems[this.menuItems.indexOf(item)] = updatedItem; // Replace the old item with the updated one
     this.calculateTotal();
   }
@@ -204,5 +209,26 @@ export class MenuListComponent implements OnInit {
       'Discount for this item is provided so action cannot be performed !!',
       'Info'
     );
+  }
+
+  viewOrderSummary() {
+    const dialogRef = this.dialog.open(OrderSummaryComponent, {
+      width: this.mobileQuery.matches ? '100%' : '50%',
+      data: {
+        menuItems: this.menuItems,
+        total: this.total,
+        discountAmount: this.discountAmount,
+        tax: this.tax,
+        netPrice: this.netPrice,
+      },
+    });
+
+    // dialogRef.componentInstance.saveClicked.subscribe(() => {
+    //   timer(2000)
+    //     .pipe(first())
+    //     .subscribe(() => {
+    //       this.getMenuItems(true);
+    //     });
+    // });
   }
 }
