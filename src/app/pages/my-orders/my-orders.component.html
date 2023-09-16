@@ -13,7 +13,11 @@
                     </div>
                     <div class="fw-medium">{{item.name}}</div>
                     <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                    <div class="qty-count mb-2">Qty: {{item.qty}}</div>
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="qty-count mb-2">Qty: {{item.qty}}</div>
+                        <button mat-raised-button color="accent" (click)="cancelOrder(item)">Cancel</button>
+                    </div>
+                  
                 
                 </div>
             </ng-container>

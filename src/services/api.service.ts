@@ -59,4 +59,8 @@ export class ApiService {
   fetchOrderedItems(){
     return this.http.get<MenuItem[]>(`${this.apiUrl}/orders`);
   }
+
+  cancelOrder(id:number){
+    return this.http.delete<MenuItem>(`${this.apiUrl}/orders/${id}`);
+  }
 }

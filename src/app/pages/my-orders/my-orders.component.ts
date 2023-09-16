@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { finalize, first } from 'rxjs';
 import { ApiService } from 'src/services/api.service';
 
@@ -11,7 +12,7 @@ import { ApiService } from 'src/services/api.service';
 })
 export class MyOrdersComponent implements OnInit{
   orderedItems:any
-  constructor(private _apiService:ApiService,private spinner:NgxSpinnerService){}
+  constructor(private _apiService:ApiService,private spinner:NgxSpinnerService,private toastr:ToastrService){}
 
   ngOnInit(): void {
     this.getOrderedItems()
@@ -22,6 +23,17 @@ export class MyOrdersComponent implements OnInit{
     this._apiService.fetchOrderedItems().pipe(first(),finalize(()=> this.spinner.hide())).subscribe({
       next:(res:any)=>{
         this.orderedItems=res.flat(1)
+      },error:(error:HttpErrorResponse)=>{
+        throw error
+      }
+    })
+  }
+
+  cancelOrder(item:any){
+    this.spinner.show()
+    this._apiService.cancelOrder(item.id).pipe(first(),finalize(()=> this.spinner.hide())).subscribe({
+      next:()=>{
+        this.toastr.info(`${item.name} got cancelled !!`, 'Info');
       },error:(error:HttpErrorResponse)=>{
         throw error
       }

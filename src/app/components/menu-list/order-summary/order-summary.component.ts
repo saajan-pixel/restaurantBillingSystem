@@ -37,22 +37,23 @@ export class OrderSummaryComponent implements OnInit {
 
   order() {
     this.spinner.show();
-    this._apiService
-      .orderedItems(this.menuItems)
-      .pipe(
-        first(),
-        finalize(() => this.spinner.hide())
-      )
-      .subscribe({
-        next: () => {
-          this.router.navigateByUrl('/orderSuccess');
-          this.menuItems.forEach((item) => {
+
+    this.menuItems.forEach((item) => {
+      this._apiService
+        .orderedItems(item)
+        .pipe(
+          first(),
+          finalize(() => this.spinner.hide())
+        )
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl('/orderSuccess');
             this._apiService.deleteMenuItem(item.id).pipe(first()).subscribe();
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          throw error;
-        },
-      });
+          },
+          error: (error: HttpErrorResponse) => {
+            throw error;
+          },
+        });
+    });
   }
 }
