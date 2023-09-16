@@ -30,7 +30,6 @@ export class DiscountDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItem = this.data;
-    console.log("iut",this.menuItem)
   }
 
   calculateDiscountAmount() {
