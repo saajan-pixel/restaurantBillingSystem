@@ -33,7 +33,7 @@ export class MyOrdersComponent implements OnInit{
     this.spinner.show()
     this._apiService.cancelOrder(item.id).pipe(first(),finalize(()=> this.spinner.hide())).subscribe({
       next:()=>{
-        this.toastr.info(`${item.name} got cancelled !!`, 'Info');
+        this.toastr.error(`${item.name} got cancelled !!`, 'Cancel');
         this.getOrderedItems()
       },error:(error:HttpErrorResponse)=>{
         throw error
