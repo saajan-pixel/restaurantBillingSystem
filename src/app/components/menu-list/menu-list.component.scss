@@ -10,13 +10,19 @@
     outline: none;
 }
 
-.menu-name{
-    color: rgb(16, 16, 167);
-}
 
 .tbody-td{
     padding-left: 9px;
     padding-top: 15px;
     font-weight: 500;
     font-size: 0.9rem;
+}
+
+.discount-badge{
+    background: #15a85b;
+    padding: 5px 10px;
+    width: 117px;
+    color: white;
+    border-radius: 5px;
+    margin-top: 5px;
 }
