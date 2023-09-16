@@ -1,9 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialState } from './menuItem.state';
 import { retrieveMenuItems } from './menuItem.action';
+import { MenuItem } from '../interface/interfaces';
 
 interface MenuItemState {
-  menuItem: any; // You would replace 'any' with the actual type of menuItem
+  menuItem: MenuItem; // You would replace 'any' with the actual type of menuItem
 }
 
 const _retrieveMenuItemsReducer = createReducer(

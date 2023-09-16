@@ -23,8 +23,10 @@ export class DiscountDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _apiService: ApiService,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.menuItem = this.data;

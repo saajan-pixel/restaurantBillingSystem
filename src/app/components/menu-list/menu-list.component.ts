@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MenuItem } from 'src/app/interface/interfaces';
-
+import { MediaMatcher } from '@angular/cdk/layout';
 interface FormItem {
   qty: number;
   subTotal: string;
@@ -30,14 +30,18 @@ export class MenuListComponent implements OnInit {
   netPrice = 0;
   tax = 10;
   isRemoved = false;
+  mobileQuery!: MediaQueryList;
 
   constructor(
     private _apiService: ApiService,
     public dialog: MatDialog,
     private toastr: ToastrService,
     private store: Store<{ menuItem: { menuItem: {} } }>,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private mediaMatcher: MediaMatcher
+  ) {
+    this.mobileQuery = this.mediaMatcher.matchMedia('(max-width: 600px)'); // Adjust the breakpoint as needed
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -143,7 +147,7 @@ export class MenuListComponent implements OnInit {
       return;
     }
     const dialogRef = this.dialog.open(DiscountDialogComponent, {
-      width: '50%',
+      width: this.mobileQuery.matches ? '100%' : '50%',
       data: item,
     });
 
