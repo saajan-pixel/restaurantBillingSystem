@@ -16,7 +16,7 @@ export class DiscountDialogComponent implements OnInit {
   @Output() saveClicked: EventEmitter<boolean> = new EventEmitter<boolean>(false);
   menuItem!: MenuItem 
   discountAmount!: number;
-  discountPercent: number=10;
+  discountPercent!:number
   isDiscountApplied=false
 
   constructor(
@@ -33,11 +33,7 @@ export class DiscountDialogComponent implements OnInit {
   }
 
   calculateDiscountAmount() {
-    if (this.discountPercent > 100) {
-      this.discountPercent = 0;
-    }
-
-    this.discountAmount = (this.discountPercent * this.menuItem.subTotal) / 100;
+    this.discountAmount = (this.menuItem.discountPercent * this.menuItem.subTotal) / 100;
   }
 
   update() {

@@ -1,19 +1,18 @@
 <div mat-dialog-content>
   <h4 class="fw-bold"> {{menuItem.name}}</h4>
-  <mat-chip-option (click)="applyDiscount()">Apply {{discountPercent}} % Discount</mat-chip-option>
+  <mat-chip-option (click)="applyDiscount()">Apply {{menuItem.discountPercent}} % Discount</mat-chip-option>
   <div class="row mt-4" *ngIf="isDiscountApplied">
     <div class="col-12 col-md-12 col-lg-6">
-      <div class="discount-amount">
-        <label>Discount Amount</label>
-        <input type="number" [(ngModel)]="discountAmount" [readOnly]="true" class="form-control mt-2" min="0">
-      </div>
-
-      <div class="discount-percent mt-3">
+      <div class="discount-percent">
         <label>Discount Percent</label>
-        <input type="number" [(ngModel)]="discountPercent" [readOnly]="true" class="form-control mt-2" min="0"
+        <input type="number" [(ngModel)]="menuItem.discountPercent" [readOnly]="true" class="form-control mt-2" min="0"
           max="100">
       </div>
 
+      <div class="discount-amount mt-3">
+        <label>Discount Amount</label>
+        <input type="number" [(ngModel)]="discountAmount" [readOnly]="true" class="form-control mt-2" min="0">
+      </div>
     </div>
     <div class="col-12 col-md-12 col-lg-6 mt-4 mt-lg-0">
       <div class="image mb-2">
