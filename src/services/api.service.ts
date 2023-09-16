@@ -8,8 +8,8 @@ import { ItemList, MenuCategory, MenuItem } from 'src/app/interface/interfaces';
 })
 export class ApiService {
   private cachedData$!: Observable<ItemList[]>;
-  apiUrl="https://rbsapi-4zn3.onrender.com"
-  // apiUrl = 'http://localhost:3000';
+  // apiUrl="https://rbsapi-4zn3.onrender.com"
+  apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 

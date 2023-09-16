@@ -1,10 +1,6 @@
 <div class="mt-4 p-4 container border">
     <div class="header fs-5 fw-medium">My Orders</div>
-    <ng-container *ngIf="orderedItems.length > 0">
-        <div class="d-flex justify-content-center">
-            <button mat-raised-button color="accent" class="mt-3">Your order is being prepared !!</button>
-        </div>
-    
+    <ng-container *ngIf="orderedItems?.length > 0">
         <div class="row mt-5" [ngClass]="orderedItems.length === 2 ? 'd-flex justify-content-center':''">
             <ng-container >
                 <div class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-5 menu-item" *ngFor="let item of orderedItems">
@@ -25,7 +21,7 @@
     
     </ng-container>
 
-    <div class="mt-5 text-center" *ngIf="orderedItems.length===0">No orders available</div>
+    <div class="mt-5 text-center" *ngIf="orderedItems?.length===0">No orders available</div>
 
 
 </div>
