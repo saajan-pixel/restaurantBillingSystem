@@ -12,7 +12,6 @@ export interface MenuItem extends ItemList{
     subTotal:number,
     isDiscounted?:boolean,
     discountPercent:number
-
 }
 
 export interface MenuCategory{

@@ -139,7 +139,7 @@ export class MenuListComponent implements OnInit {
     }
   }
 
-  openDialog(item: any, index: number): void {
+  openDialog(item: MenuItem, index: number): void {
     if (this.menuItems[index].isDiscounted) {
       this.toastr.info(
         'Discount for this item has been already provided !!',

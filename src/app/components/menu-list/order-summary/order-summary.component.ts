@@ -2,10 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, first } from 'rxjs';
 import { ItemList, MenuItem } from 'src/app/interface/interfaces';
+import { resetMenuItem, retrieveMenuItems } from 'src/app/store/menuItem.action';
 import { ApiService } from 'src/services/api.service';
 
 interface OrderSummary {
@@ -30,7 +32,8 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
     private router: Router,
     private _apiService: ApiService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store<{ menuItems: { menuItems: {} } }>,
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +52,7 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
         .subscribe({
           next: () => {
             this.router.navigateByUrl('/orderSuccess');
+            this.store.dispatch(resetMenuItem())
           },
           error: (error: HttpErrorResponse) => {
             if (error.status === 500) {

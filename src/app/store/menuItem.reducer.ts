@@ -1,19 +1,15 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { initialState } from './menuItem.state';
-import { retrieveMenuItems } from './menuItem.action';
-import { MenuItem } from '../interface/interfaces';
-
-interface MenuItemState {
-  menuItem: MenuItem; // You would replace 'any' with the actual type of menuItem
-}
+import { resetMenuItem, retrieveMenuItems } from './menuItem.action';
 
 const _retrieveMenuItemsReducer = createReducer(
   initialState,
   on(retrieveMenuItems, (state, { value }) => {
     return { ...state, menuItem: value };
-  })
+  }),
+  on(resetMenuItem,()=> initialState)
 );
 
-export const retrieveMenuItemsReducer = (state: any, action: any) => {
+export const retrieveMenuItemsReducer = (state:any, action: Action) => {
   return _retrieveMenuItemsReducer(state, action);
 };
