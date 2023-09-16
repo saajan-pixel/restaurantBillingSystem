@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,9 +13,11 @@ import { ApiService } from 'src/services/api.service';
   styleUrls: ['./discount-dialog.component.scss'],
 })
 export class DiscountDialogComponent implements OnInit {
-  menuItem: any = {};
+  @Output() saveClicked: EventEmitter<boolean> = new EventEmitter<boolean>(false);
+  menuItem!: MenuItem 
   discountAmount!: number;
-  discountPercent!: number;
+  discountPercent: number=10;
+  isDiscountApplied=false
 
   constructor(
     public dialogRef: MatDialogRef<DiscountDialogComponent>,
@@ -25,23 +27,7 @@ export class DiscountDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.discountAmount);
     this.menuItem = this.data;
-  }
-
-  get discountValidation() {
-    return (
-      (this.discountAmount === undefined || this.discountAmount === 0) &&
-      (this.discountPercent === undefined || this.discountAmount === 0)
-    );
-  }
-
-  calculateDiscountPercent() {
-    if (this.discountAmount > this.menuItem.price) {
-      this.discountAmount = 0;
-    }
-
-    this.discountPercent = (this.discountAmount / this.menuItem.price) * 100;
   }
 
   calculateDiscountAmount() {
@@ -49,16 +35,18 @@ export class DiscountDialogComponent implements OnInit {
       this.discountPercent = 0;
     }
 
-    this.discountAmount = (this.discountPercent * this.menuItem.price) / 100;
+    this.discountAmount = (this.discountPercent * this.menuItem.subTotal) / 100;
   }
 
   update() {
     this.spinner.show();
+    this.saveClicked.emit(true)
     const subTotalAfterDiscount = this.menuItem.price - this.discountAmount;
     const data:MenuItem = {
       ...this.menuItem,
       subTotal: subTotalAfterDiscount,
       isDiscounted: true,
+      discountAmount:this.discountAmount
     };
 
     this._apiService
@@ -70,5 +58,11 @@ export class DiscountDialogComponent implements OnInit {
           throw error;
         },
       });
+  }
+
+  applyDiscount(){
+    this.isDiscountApplied=!this.isDiscountApplied
+    this.calculateDiscountAmount()
+
   }
 }

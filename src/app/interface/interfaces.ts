@@ -9,7 +9,8 @@ export interface ItemList{
 
 export interface MenuItem extends ItemList{
     subTotal:number,
-    isDiscounted?:boolean
+    isDiscounted?:boolean,
+    discountAmount:number
 
 }
 

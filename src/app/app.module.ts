@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -42,10 +43,7 @@ const MaterialModule = [
   MatDialogModule,
   MatButtonModule,
   MatTabsModule,
-  ToastrModule.forRoot({
-    preventDuplicates: true,
-    closeButton:true
-  }),
+  MatChipsModule,
 ];
 @NgModule({
   declarations: [
@@ -67,6 +65,10 @@ const MaterialModule = [
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ menuItem: retrieveMenuItemsReducer }),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      closeButton: true,
+    }),
   ],
   providers: [
     ApiService,

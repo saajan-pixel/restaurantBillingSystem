@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th scope="col" style="min-width: 200px;">Item</th>
-          <th scope="col" style="width: 100px;">Qty</th>
+          <th scope="col" class="text-center" style="width: 100px;">Qty</th>
           <th scope="col" style="min-width: 120px;">Price</th>
           <th scope="col" style="min-width: 120px;">Sub Total</th>
           <th scope="col">
@@ -16,9 +16,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of menuItems;index as i">
-          <td (click)="openDialog(item,i)" class="cursor-pointer menu-name"> {{item.name}}</td>
+          <td (click)="openDialog(item,i)" class="cursor-pointer menu-name" title="Apply Discount"> {{item.name}}</td>
           <td>
-            <input class="form-control form-control-sm" type="number" min="1" [(ngModel)]="item.qty" (input)="(item.subTotal=item.qty * item.price);calculateTotal()">
+            <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
+              <div class="minus common" (click)="decrementQty(item)">-</div>
+              <div class="qty-count">{{item.qty}}</div>
+              <div class="plus common" (click)="incrementQty(item)">+</div>
+          </div>
           </td>
           <td>Rs {{item.price.toLocaleString()}}</td>
           <td> Rs {{(item.isDiscounted ? item.subTotal : item.qty * item.price).toLocaleString()}}</td>
@@ -56,8 +60,6 @@
         <td></td>
         <td class="tbody-td">{{tax}} %</td>
       </tbody>
-
-
 
       <tbody>
         <td class="tbody-td">Net Price</td>

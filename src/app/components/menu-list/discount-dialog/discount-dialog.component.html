@@ -1,18 +1,17 @@
 <div mat-dialog-content>
   <h4 class="fw-bold"> {{menuItem.name}}</h4>
-
-  <div class="row">
+  <mat-chip-option (click)="applyDiscount()">Apply {{discountPercent}} % Discount</mat-chip-option>
+  <div class="row mt-4" *ngIf="isDiscountApplied">
     <div class="col-12 col-md-12 col-lg-6">
       <div class="discount-amount">
         <label>Discount Amount</label>
-        <input type="number" [(ngModel)]="discountAmount"  (input)="calculateDiscountPercent()"
-          class="form-control mt-2" min="0">
+        <input type="number" [(ngModel)]="discountAmount" [readOnly]="true" class="form-control mt-2" min="0">
       </div>
 
       <div class="discount-percent mt-3">
         <label>Discount Percent</label>
-        <input type="number" [(ngModel)]="discountPercent" (input)="calculateDiscountAmount()"
-          class="form-control mt-2" min="0" max="100">
+        <input type="number" [(ngModel)]="discountPercent" [readOnly]="true" class="form-control mt-2" min="0"
+          max="100">
       </div>
 
     </div>
@@ -21,13 +20,15 @@
         <img class="menu-img" src="{{menuItem.img}}" alt="">
       </div>
 
-      <div>{{menuItem.name}}</div>
-      <div class="price my-2">Rs {{menuItem.price?.toLocaleString()}}</div>
+      <div class="fw-bold">{{menuItem.name}}</div>
+      <div class="price my-2">Price: Rs {{menuItem.price.toLocaleString()}}</div>
+      <div class="qty my-2">Qty: {{menuItem.qty}}</div>
+      <div class="subToal my-2">Total Price: Rs {{menuItem.subTotal.toLocaleString()}}</div>
     </div>
   </div>
 
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button [disabled]="discountValidation" mat-button mat-dialog-close cdkFocusInitial (click)="update()">Save</button>
+  <button [disabled]="!isDiscountApplied" mat-button mat-dialog-close cdkFocusInitial (click)="update()">Save</button>
 </div>

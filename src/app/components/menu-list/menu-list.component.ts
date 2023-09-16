@@ -1,8 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { finalize, first, switchMap, timer } from 'rxjs';
 import { ApiService } from 'src/services/api.service';
@@ -15,7 +12,7 @@ import { MenuItem } from 'src/app/interface/interfaces';
 
 interface FormItem {
   qty: number;
-  subTotal: string; 
+  subTotal: string;
 }
 
 @Component({
@@ -26,13 +23,14 @@ interface FormItem {
 export class MenuListComponent implements OnInit {
   itemsPerPage: number = 16;
   menuItems: MenuItem[] = [];
-  pagedMenuItems: MenuItem[]=[];
+  pagedMenuItems: MenuItem[] = [];
   form!: FormGroup;
   total = 0;
   discountAmount = 0;
   netPrice = 0;
   tax = 10;
   isRemoved = false;
+
   constructor(
     private _apiService: ApiService,
     public dialog: MatDialog,
@@ -44,7 +42,6 @@ export class MenuListComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getMenuItems();
-    console.log("menu list component")
   }
 
   createForm(item?: FormItem) {
@@ -81,7 +78,7 @@ export class MenuListComponent implements OnInit {
         switchMap((res) => {
           this.menuItems = res;
           this.calculateTotal();
-  
+
           if (!this.isRemoved) {
             return this.store.select('menuItem');
           } else {
@@ -108,16 +105,13 @@ export class MenuListComponent implements OnInit {
     );
 
     this.calculateTotalDiscountAmount();
-
   }
 
   calculateTotalDiscountAmount() {
-    const subTotal = this.menuItems.reduce(
-      (acc: number, item: any) => acc + item.subTotal,
+    this.discountAmount = this.menuItems.reduce(
+      (acc: number, item: MenuItem) => acc + item.discountAmount,
       0
     );
-
-    this.discountAmount = this.total - subTotal;
 
     this.calculateNetPrice();
   }
@@ -134,7 +128,6 @@ export class MenuListComponent implements OnInit {
   calculateNetPrice() {
     if (this.discountAmount !== 0) {
       const amount = this.total - this.discountAmount;
-      console.log('aaa', amount);
       this.netPrice = amount + (amount * this.tax) / 100;
     } else {
       this.netPrice = this.total + (this.total * this.tax) / 100;
@@ -142,20 +135,24 @@ export class MenuListComponent implements OnInit {
   }
 
   openDialog(item: any, index: number): void {
-    if (item.subTotal !== this.menuItems[index].price) {
-      this.toastr.info('Discount for this item has been already provided !!','Info')
-      return
+    if (this.menuItems[index].isDiscounted) {
+      this.toastr.info(
+        'Discount for this item has been already provided !!',
+        'Info'
+      );
+      return;
     }
-
     const dialogRef = this.dialog.open(DiscountDialogComponent, {
       width: '50%',
       data: item,
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.componentInstance.saveClicked.subscribe(() => {
       timer(2000)
         .pipe(first())
-        .subscribe(() => this.getMenuItems(true));
+        .subscribe(() => {
+          this.getMenuItems(true);
+        });
     });
   }
 
@@ -174,5 +171,34 @@ export class MenuListComponent implements OnInit {
           throw error;
         },
       });
+  }
+
+  incrementQty(item: MenuItem) {
+    if (item.isDiscounted) {
+      this.actionInfo();
+      return;
+    }
+    const updatedItem = { ...item, qty: item.qty + 1, subTotal: (item.qty + 1) * item.price };
+    this.menuItems[this.menuItems.indexOf(item)] = updatedItem; // Replace the old item with the updated one
+    this.calculateTotal();
+  }
+
+  decrementQty(item: MenuItem) {
+    if (item.isDiscounted) {
+      this.actionInfo();
+      return;
+    }
+    if (item.qty > 1) {
+      item.qty -= 1;
+      item.subTotal = item.qty * item.price;
+      this.calculateTotal();
+    }
+  }
+
+  actionInfo() {
+    this.toastr.info(
+      'Discount for this item is provided so action cannot be performed !!',
+      'Info'
+    );
   }
 }

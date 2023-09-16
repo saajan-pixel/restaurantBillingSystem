@@ -99,7 +99,7 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
   }
 
   addToMenu(menuItem: any) {
-    const item = { ...menuItem, subTotal: menuItem.price };
+    const item = { ...menuItem, subTotal: menuItem.price,discountAmount:0 };
     this.spinner.show();
     this._apiService
       .addToMenuItems(item)
