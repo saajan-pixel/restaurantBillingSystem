@@ -14,18 +14,7 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getItemsList() {
-    if (!this.cachedData$) {
-      // If data is not cached, make the API call and cache the result using shareReplay
-      this.cachedData$ = this.http.get<ItemList[]>(`${this.apiUrl}/items`).pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('API call failed', error);
-          return [];
-        }),
-        shareReplay(1) // Cache the result and replay it to new subscribers
-      );
-    }
-
-    return this.cachedData$;
+    return this.http.get<ItemList[]>(`${this.apiUrl}/items`)
   }
 
   getMenuCategories() {

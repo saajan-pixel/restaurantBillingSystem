@@ -26,7 +26,7 @@ export class MenuListComponent implements OnInit {
   menuItems: MenuItem[] = [];
   pagedMenuItems: MenuItem[] = [];
   form!: FormGroup;
-  total = 0;
+  subTotal = 0;
   discountAmount = 0;
   netPrice = 0;
   tax = 10;
@@ -104,8 +104,9 @@ export class MenuListComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.total = this.menuItems.reduce(
-      (acc: number, item: any) => acc + item.price * item.qty,
+    console.log('totla', this.menuItems);
+    this.subTotal = this.menuItems.reduce(
+      (acc: number, item: MenuItem) => acc + item.subTotal,
       0
     );
 
@@ -113,10 +114,14 @@ export class MenuListComponent implements OnInit {
   }
 
   calculateTotalDiscountAmount() {
-    this.discountAmount = this.menuItems.reduce(
+    const discount = this.menuItems.reduce(
       (acc: number, item: MenuItem) => acc + item.discountAmount,
       0
     );
+
+    isNaN(discount)
+      ? (this.discountAmount = 0)
+      : (this.discountAmount = discount);
 
     this.calculateNetPrice();
   }
@@ -127,15 +132,15 @@ export class MenuListComponent implements OnInit {
   }
 
   onInputQty(data: any) {
-    this.total = data.qty * data.subTotal + this.total;
+    this.subTotal = data.qty * data.subTotal + this.subTotal;
   }
 
   calculateNetPrice() {
     if (this.discountAmount !== 0) {
-      const amount = this.total - this.discountAmount;
+      const amount = this.subTotal - this.discountAmount;
       this.netPrice = amount + (amount * this.tax) / 100;
     } else {
-      this.netPrice = this.total + (this.total * this.tax) / 100;
+      this.netPrice = this.subTotal + (this.subTotal * this.tax) / 100;
     }
   }
 
@@ -183,13 +188,7 @@ export class MenuListComponent implements OnInit {
       this.actionInfo();
       return;
     }
-    const updatedItem = {
-      ...item,
-      qty: item.qty + 1,
-      subTotal: (item.qty + 1) * item.price,
-    };
-    this.menuItems[this.menuItems.indexOf(item)] = updatedItem; // Replace the old item with the updated one
-    this.calculateTotal();
+    this.updateMenuItemOnIncrementorDecrement(item, item.qty + 1);
   }
 
   decrementQty(item: MenuItem) {
@@ -198,10 +197,20 @@ export class MenuListComponent implements OnInit {
       return;
     }
     if (item.qty > 1) {
-      item.qty -= 1;
-      item.subTotal = item.qty * item.price;
-      this.calculateTotal();
+      this.updateMenuItemOnIncrementorDecrement(item, item.qty - 1);
     }
+  }
+
+  updateMenuItemOnIncrementorDecrement(item: MenuItem, quantity: number) {
+    const updatedItem = {
+      ...item,
+      qty: quantity,
+      subTotal: quantity * item.price,
+    };
+
+    const indexOfItem = this.menuItems.indexOf(item);
+    this.menuItems[indexOfItem] = updatedItem; // Replace the old item with the updated one
+    this.calculateTotal();
   }
 
   actionInfo() {
@@ -216,19 +225,11 @@ export class MenuListComponent implements OnInit {
       width: this.mobileQuery.matches ? '100%' : '50%',
       data: {
         menuItems: this.menuItems,
-        total: this.total,
+        total: this.subTotal,
         discountAmount: this.discountAmount,
         tax: this.tax,
         netPrice: this.netPrice,
       },
     });
-
-    // dialogRef.componentInstance.saveClicked.subscribe(() => {
-    //   timer(2000)
-    //     .pipe(first())
-    //     .subscribe(() => {
-    //       this.getMenuItems(true);
-    //     });
-    // });
   }
 }

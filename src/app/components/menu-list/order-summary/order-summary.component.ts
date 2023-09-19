@@ -53,6 +53,9 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
           next: () => {
             this.router.navigateByUrl('/orderSuccess');
             this.store.dispatch(resetMenuItem())
+            this.menuItems.forEach((item) => {
+              this._apiService.deleteMenuItem(item.id).pipe(first()).subscribe();
+            });
           },
           error: (error: HttpErrorResponse) => {
             if (error.status === 500) {
@@ -68,8 +71,6 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.menuItems.forEach((item) => {
-      this._apiService.deleteMenuItem(item.id).pipe(first()).subscribe();
-    });
+
   }
 }

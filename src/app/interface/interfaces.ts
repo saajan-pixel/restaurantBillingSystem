@@ -4,7 +4,7 @@ export interface ItemList{
     name:string,
     qty:number,
     price:number,
-    img:URL,
+    img:string,
     discountAmount:number,
 }
 

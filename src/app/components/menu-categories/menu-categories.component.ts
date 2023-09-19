@@ -3,6 +3,7 @@ import {
   AfterContentChecked,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -10,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, first } from 'rxjs';
 import { ItemList, MenuItem } from 'src/app/interface/interfaces';
-import { retrieveMenuItems } from 'src/app/store/menuItem.action';
+import { resetMenuItem, retrieveMenuItems } from 'src/app/store/menuItem.action';
 import { ApiService } from 'src/services/api.service';
 
 @Component({
@@ -18,7 +19,7 @@ import { ApiService } from 'src/services/api.service';
   templateUrl: './menu-categories.component.html',
   styleUrls: ['./menu-categories.component.scss'],
 })
-export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
+export class MenuCategoriesComponent implements OnInit, AfterContentChecked,OnDestroy {
   allMenuItems!: ItemList[];
   mainCoursesItems!: ItemList[];
   pagedMainCoursesItems!: ItemList[];
@@ -40,6 +41,10 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.getItems();
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(resetMenuItem())
   }
 
   /**
@@ -86,7 +91,7 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
   }
 
   addToMenu(itemList: ItemList) {
-    const item = { ...itemList, subTotal: itemList.price, discountAmount: 0 };
+    const item = { ...itemList, subTotal: itemList.price * itemList.qty, discountAmount: 0 };
     this.spinner.show();
     this._apiService
       .addToMenuItems(item)
@@ -98,7 +103,6 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked {
         next: () => {
           // dispatching menuItem from MenuCategory
           this.store.dispatch(retrieveMenuItems({ value: item }));
-          // this.getMenuItems();
         },
         error: (error: HttpErrorResponse) => {
           if (error.status === 500) {
