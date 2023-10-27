@@ -10,6 +10,7 @@ import {
 } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
+import { NgxGoogleAnalyticsModule } from 'ngx-google-analytics';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -75,6 +76,7 @@ const MaterialModule = [
       preventDuplicates: true,
       closeButton: true,
     }),
+    NgxGoogleAnalyticsModule.forRoot('GTM-N4T83S47')
   ],
   providers: [
     ApiService,
