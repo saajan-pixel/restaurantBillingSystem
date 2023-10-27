@@ -18,7 +18,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    NgxGoogleAnalyticsModule.forRoot('GTM-N4T83S47'),
+    NgxGoogleAnalyticsModule.forRoot('G-KXHHFZX3E1'),
     NgxGoogleAnalyticsRouterModule,
   ],
   exports: [RouterModule],

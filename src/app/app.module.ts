@@ -76,7 +76,7 @@ const MaterialModule = [
       preventDuplicates: true,
       closeButton: true,
     }),
-    NgxGoogleAnalyticsModule.forRoot('GTM-N4T83S47')
+    NgxGoogleAnalyticsModule.forRoot('G-KXHHFZX3E1')
   ],
   providers: [
     ApiService,
