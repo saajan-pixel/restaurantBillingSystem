@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   onClickFb() {
     // Open a new window or redirect to Facebook share URL
 
-    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://restaurant-billing-system.vercel.app/')}`;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://hrisstagefev2.ndplhrm.com/')}`;
     window.open(facebookShareUrl, '_blank');
   }
 }

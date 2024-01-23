@@ -17,7 +17,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+}),
     NgxGoogleAnalyticsModule.forRoot('G-KXHHFZX3E1'),
     NgxGoogleAnalyticsRouterModule,
   ],
