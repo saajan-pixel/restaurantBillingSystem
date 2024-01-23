@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("initial")
-    const url = 'https://hrisstagefev2.ndplhrm.com/';
+    const url = 'https://restaurant-billing-system.vercel.app/';
     const title = 'change Page Title';
     const description = 'chnage page description';
     const image = 'https://www.myhealthunlimited.com/wp-content/uploads/2016/07/300x200.png'
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   onClickFb() {
     // Open a new window or redirect to Facebook share URL
 
-    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://hrisstagefev2.ndplhrm.com/')}`;
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('url')}`;
     window.open(facebookShareUrl, '_blank');
   }
 }
