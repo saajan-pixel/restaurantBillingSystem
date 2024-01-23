@@ -23,4 +23,11 @@ export class AppComponent implements OnInit {
     this.meta.updateTag({ name: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:image', content: image });
   }
+
+  onClickFb() {
+    // Open a new window or redirect to Facebook share URL
+
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://restaurant-billing-system.vercel.app/')}`;
+    window.open(facebookShareUrl, '_blank');
+  }
 }
