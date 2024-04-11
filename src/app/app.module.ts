@@ -79,7 +79,6 @@ const MaterialModule = [
     NgxGoogleAnalyticsModule.forRoot('G-KXHHFZX3E1')
   ],
   providers: [
-    ApiService,
     provideAnimations(), // required animations providers
     provideToastr(), // Toastr providers
   ],

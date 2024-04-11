@@ -1,104 +1,179 @@
 <div class="mt-4 border p-3">
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-        <mat-tab label="All Items">
-            <div class="row h-850  mt-3">
-                <ng-container *ngFor="let item of pagedMenuItems">
-                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
-                        <div class="image mb-2">
-                            <img class="menu-img" src="{{item.img}}" alt="">
-                        </div>
-                        <div class="fw-medium">{{item.name}}</div>
-                        <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
-                                <div class="minus common" (click)="decrementQty(item)">-</div>
-                                <div class="qty-count">{{item.qty}}</div>
-                                <div class="plus common" (click)="incrementQty(item)">+</div>
-                            </div>
-                            <button mat-raised-button color="accent" (click)="addToMenu(item)">Add to Menu</button>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <app-pagination (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'all')" *ngIf="allMenuItems"
-                    [itemsPerPage]="itemsPerPage" [lists]="allMenuItems"></app-pagination>
+  <mat-tab-group
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+  >
+    <mat-tab label="All Items">
+      <div class="row h-850  mt-3">
+        <ng-container *ngFor="let item of pagedMenuItems">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
+            <div class="image mb-2">
+              <img
+                class="menu-img"
+                src="{{item.img}}"
+                alt=""
+              >
             </div>
-        </mat-tab>
-
-        <mat-tab label="Main Courses">
-            <div class="row h-850 mt-3">
-                <ng-container *ngFor="let item of pagedMainCoursesItems">
-                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
-                        <div class="image mb-2">
-                            <img class="menu-img" src="{{item.img}}" alt="">
-                        </div>
-                        <div class="fw-medium">{{item.name}}</div>
-                        <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
-                                <div class="minus common" (click)="decrementQty(item)">-</div>
-                                <div class="qty-count">{{item.qty}}</div>
-                                <div class="plus common" (click)="incrementQty(item)">+</div>
-                            </div>
-                            <button mat-raised-button color="accent" (click)="addToMenu(item)">Add to Menu</button>
-                        </div>
-
-                    </div>
-                </ng-container>
-
-                <app-pagination (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'main courses')"
-                    *ngIf="mainCoursesItems" [itemsPerPage]="itemsPerPage" [lists]="mainCoursesItems"></app-pagination>
+            <div class="fw-medium">{{item.name}}</div>
+            <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
+                <div
+                  class="minus common"
+                  (click)="decrementQty(item)"
+                >-</div>
+                <div class="qty-count">{{item.qty}}</div>
+                <div
+                  class="plus common"
+                  (click)="incrementQty(item)"
+                >+</div>
+              </div>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="addToMenu(item)"
+              >Add to Menu</button>
             </div>
-        </mat-tab>
+          </div>
+        </ng-container>
 
-        <mat-tab label="Appetizer">
-            <div class="row h-850 mt-3">
-                <ng-container *ngFor="let item of pagedAppeitizerItems">
-                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-3 menu-item">
-                        <div class="image mb-2">
-                            <img class="menu-img" src="{{item.img}}" alt="">
-                        </div>
-                        <div class="fw-medium">{{item.name}}</div>
-                        <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
-                                <div class="minus common" (click)="decrementQty(item)">-</div>
-                                <div class="qty-count">{{item.qty}}</div>
-                                <div class="plus common" (click)="incrementQty(item)">+</div>
-                            </div>
-                            <button mat-raised-button color="accent" (click)="addToMenu(item)">Add to Menu</button>
-                        </div>
-                    </div>
-                </ng-container>
+        <app-pagination
+          (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'all')"
+          *ngIf="allMenuItems"
+          [itemsPerPage]="itemsPerPage"
+          [lists]="allMenuItems"
+        ></app-pagination>
+      </div>
+    </mat-tab>
 
-                <app-pagination (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'appeitizer')"
-                    *ngIf="appeitizerItems" [itemsPerPage]="itemsPerPage" [lists]="appeitizerItems"></app-pagination>
+    <mat-tab label="Main Courses">
+      <div class="row h-850 mt-3">
+        <ng-container *ngFor="let item of pagedMainCoursesItems">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
+            <div class="image mb-2">
+              <img
+                class="menu-img"
+                src="{{item.img}}"
+                alt=""
+              >
             </div>
-        </mat-tab>
-
-        <mat-tab label="Beverages">
-            <div class="row h-850 mt-3">
-                <ng-container *ngFor="let item of pagedBeverageItems">
-                    <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
-                        <div class="image mb-2">
-                            <img class="menu-img" src="{{item.img}}" alt="">
-                        </div>
-                        <div class="fw-medium">{{item.name}}</div>
-                        <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
-                                <div class="minus common" (click)="decrementQty(item)">-</div>
-                                <div class="qty-count">{{item.qty}}</div>
-                                <div class="plus common" (click)="incrementQty(item)">+</div>
-                            </div>
-                            <button mat-raised-button color="accent" (click)="addToMenu(item)">Add to Menu</button>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <app-pagination (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'beverages')"
-                    *ngIf="beverageItems" [itemsPerPage]="itemsPerPage" [lists]="beverageItems"></app-pagination>
+            <div class="fw-medium">{{item.name}}</div>
+            <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
+                <div
+                  class="minus common"
+                  (click)="decrementQty(item)"
+                >-</div>
+                <div class="qty-count">{{item.qty}}</div>
+                <div
+                  class="plus common"
+                  (click)="incrementQty(item)"
+                >+</div>
+              </div>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="addToMenu(item)"
+              >Add to Menu</button>
             </div>
-        </mat-tab>
-    </mat-tab-group>
+
+          </div>
+        </ng-container>
+
+        <app-pagination
+          (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'main courses')"
+          *ngIf="mainCoursesItems"
+          [itemsPerPage]="itemsPerPage"
+          [lists]="mainCoursesItems"
+        ></app-pagination>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Appetizer">
+      <div class="row h-850 mt-3">
+        <ng-container *ngFor="let item of pagedAppeitizerItems">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-3 menu-item">
+            <div class="image mb-2">
+              <img
+                class="menu-img"
+                src="{{item.img}}"
+                alt=""
+              >
+            </div>
+            <div class="fw-medium">{{item.name}}</div>
+            <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
+                <div
+                  class="minus common"
+                  (click)="decrementQty(item)"
+                >-</div>
+                <div class="qty-count">{{item.qty}}</div>
+                <div
+                  class="plus common"
+                  (click)="incrementQty(item)"
+                >+</div>
+              </div>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="addToMenu(item)"
+              >Add to Menu</button>
+            </div>
+          </div>
+        </ng-container>
+
+        <app-pagination
+          (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'appeitizer')"
+          *ngIf="appeitizerItems"
+          [itemsPerPage]="itemsPerPage"
+          [lists]="appeitizerItems"
+        ></app-pagination>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Beverages">
+      <div class="row h-850 mt-3">
+        <ng-container *ngFor="let item of pagedBeverageItems">
+          <div class="col-12 col-md-6 col-lg-12 col-xl-6 col-xxl-4 mb-5 menu-item">
+            <div class="image mb-2">
+              <img
+                class="menu-img"
+                src="{{item.img}}"
+                alt=""
+              >
+            </div>
+            <div class="fw-medium">{{item.name}}</div>
+            <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
+                <div
+                  class="minus common"
+                  (click)="decrementQty(item)"
+                >-</div>
+                <div class="qty-count">{{item.qty}}</div>
+                <div
+                  class="plus common"
+                  (click)="incrementQty(item)"
+                >+</div>
+              </div>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="addToMenu(item)"
+              >Add to Menu</button>
+            </div>
+          </div>
+        </ng-container>
+
+        <app-pagination
+          (pagedMenuItemsEmitter)="onPagedMenuItemsReceived($event,'beverages')"
+          *ngIf="beverageItems"
+          [itemsPerPage]="itemsPerPage"
+          [lists]="beverageItems"
+        ></app-pagination>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

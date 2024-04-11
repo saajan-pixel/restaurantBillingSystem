@@ -1,27 +1,42 @@
 <div class="mt-4 p-4 container border">
-    <div class="header fs-5 fw-medium">My Orders</div>
-    <ng-container *ngIf="orderedItems?.length > 0">
-        <div class="row mt-5" [ngClass]="orderedItems.length === 2 ? 'd-flex justify-content-center':''">
-            <ng-container >
-                <div class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-5 menu-item" *ngFor="let item of orderedItems">
-                    <div class="image mb-2">
-                        <img class="menu-img" src="{{item.img}}" alt="">
-                    </div>
-                    <div class="fw-medium">{{item.name}}</div>
-                    <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div class="qty-count mb-2">Qty: {{item.qty}}</div>
-                        <button mat-raised-button color="accent" (click)="cancelOrder(item)">Cancel</button>
-                    </div>
-                  
-                
-                </div>
-            </ng-container>
+  <div class="header fs-5 fw-medium">My Orders</div>
+  <ng-container *ngIf="orderedItems?.length > 0">
+    <div
+      class="row mt-5"
+      [ngClass]="orderedItems.length === 2 ? 'd-flex justify-content-center':''"
+    >
+      <ng-container>
+        <div
+          class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4 mb-5 menu-item"
+          *ngFor="let item of orderedItems"
+        >
+          <div class="image mb-2">
+            <img
+              class="menu-img"
+              src="{{item.img}}"
+              alt=""
+            >
+          </div>
+          <div class="fw-medium">{{item.name}}</div>
+          <div class="price my-2">Price: Rs {{item.price.toLocaleString()}}</div>
+          <div class="d-flex justify-content-between flex-wrap">
+            <div class="qty-count mb-2">Qty: {{item.qty}}</div>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="cancelOrder(item)"
+            >Cancel</button>
+          </div>
         </div>
-    
-    </ng-container>
+      </ng-container>
+    </div>
 
-    <div class="mt-5 text-center" *ngIf="orderedItems?.length===0">No orders available</div>
+  </ng-container>
+
+  <div
+    class="mt-5 text-center"
+    *ngIf="orderedItems?.length===0"
+  >No orders available</div>
 
 
 </div>

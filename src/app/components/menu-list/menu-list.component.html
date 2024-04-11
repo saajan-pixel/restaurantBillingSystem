@@ -5,10 +5,23 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col" style="min-width: 200px;">Item</th>
-            <th scope="col" class="text-center" style="width: 100px;">Qty</th>
-            <th scope="col" style="min-width: 120px;">Price</th>
-            <th scope="col" style="min-width: 120px;">Sub Total</th>
+            <th
+              scope="col"
+              style="min-width: 200px;"
+            >Item</th>
+            <th
+              scope="col"
+              class="text-center"
+              style="width: 100px;"
+            >Qty</th>
+            <th
+              scope="col"
+              style="min-width: 120px;"
+            >Price</th>
+            <th
+              scope="col"
+              style="min-width: 120px;"
+            >Sub Total</th>
             <th scope="col">
               <div class="d-flex justify-content-center">Remove</div>
             </th>
@@ -16,24 +29,38 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of menuItems;index as i">
-            <td class="menu-name" [title]="item.name">
+            <td
+              class="menu-name"
+              [title]="item.name"
+            >
               <div> {{item.name}} </div>
-              <div *ngIf="item.discountPercent > 0 && !item.isDiscounted" class="discount-badge cursor-pointer"
-                (click)="openDialog(item,i)">
+              <div
+                *ngIf="item.discountPercent > 0 && !item.isDiscounted"
+                class="discount-badge cursor-pointer"
+                (click)="openDialog(item,i)"
+              >
                 Apply Discount</div>
             </td>
             <td>
               <div class="d-flex gap-3 align-items-center mb-3 mb-md-0">
-                <div class="minus common" (click)="decrementQty(item)">-</div>
+                <div
+                  class="minus common"
+                  (click)="decrementQty(item)"
+                >-</div>
                 <div class="qty-count">{{item.qty}}</div>
-                <div class="plus common" (click)="incrementQty(item)">+</div>
+                <div
+                  class="plus common"
+                  (click)="incrementQty(item)"
+                >+</div>
               </div>
             </td>
             <td>Rs {{item.price.toLocaleString()}}</td>
             <td> Rs {{(item.isDiscounted ? item.subTotal : item.qty * item.price).toLocaleString()}}</td>
             <td>
-              <div class="d-flex justify-content-center text-danger fs-4 cursor-pointer"
-                (click)="removeMenuItem(item.id,i)">x</div>
+              <div
+                class="d-flex justify-content-center text-danger fs-4 cursor-pointer"
+                (click)="removeMenuItem(item.id,i)"
+              >x</div>
             </td>
           </tr>
         </tbody>
@@ -73,14 +100,16 @@
           <td class="tbody-td">Rs {{netPrice.toLocaleString()}}</td>
         </tbody>
       </table>
-
-
-
     </div>
 
-    <button mat-raised-button (click)="viewOrderSummary()">View Order Summary</button>
+    <button
+      mat-raised-button
+      (click)="viewOrderSummary()"
+    >View Order Summary</button>
   </ng-container>
 
-  <div class="text-center mt-2" *ngIf="menuItems?.length === 0">No item available</div>
-
+  <div
+    class="text-center mt-2"
+    *ngIf="menuItems?.length === 0"
+  >No item available</div>
 </div>

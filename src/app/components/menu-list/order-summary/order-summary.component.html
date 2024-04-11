@@ -1,73 +1,94 @@
 <div mat-dialog-content>
-    <h4 class="fw-bold">Order Summary</h4>
+  <h4 class="fw-bold">Order Summary</h4>
 
-    <div class="table-responsive mt-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col" style="min-width: 200px;">Item</th>
-                    <th scope="col" style="width: 100px;">Qty</th>
-                    <th scope="col" style="min-width: 120px;">Price</th>
-                    <th scope="col" style="min-width: 120px;">Sub Total</th>
+  <div class="table-responsive mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            style="min-width: 200px;"
+          >Item</th>
+          <th
+            scope="col"
+            style="width: 100px;"
+          >Qty</th>
+          <th
+            scope="col"
+            style="min-width: 120px;"
+          >Price</th>
+          <th
+            scope="col"
+            style="min-width: 120px;"
+          >Sub Total</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of menuItems;index as i">
-                    <td class="menu-name" [title]="item.name">
-                        {{item.name}}
-                    </td>
-                    <td>
-                        {{item.qty}}
-                    </td>
-                    <td>Rs {{item.price.toLocaleString()}}</td>
-                    <td> Rs {{item.subTotal.toLocaleString()}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of menuItems;index as i">
+          <td
+            class="menu-name"
+            [title]="item.name"
+          >
+            {{item.name}}
+          </td>
+          <td>
+            {{item.qty}}
+          </td>
+          <td>Rs {{item.price.toLocaleString()}}</td>
+          <td> Rs {{item.subTotal.toLocaleString()}}</td>
 
-                </tr>
-            </tbody>
+        </tr>
+      </tbody>
 
-            <tbody>
-                <td class="tbody-td">Total Qty</td>
-                <td></td>
-                <td></td>
-                <td class="tbody-td">{{menuItems.length}}</td>
-            </tbody>
+      <tbody>
+        <td class="tbody-td">Total Qty</td>
+        <td></td>
+        <td></td>
+        <td class="tbody-td">{{menuItems.length}}</td>
+      </tbody>
 
-            <tbody>
-                <td class="tbody-td">Total</td>
-                <td></td>
-                <td></td>
-                <td class="tbody-td">Rs {{data.total.toLocaleString()}}</td>
-            </tbody>
+      <tbody>
+        <td class="tbody-td">Total</td>
+        <td></td>
+        <td></td>
+        <td class="tbody-td">Rs {{data.total.toLocaleString()}}</td>
+      </tbody>
 
-            <tbody>
-                <td class="tbody-td">Discount</td>
-                <td></td>
-                <td></td>
-                <td class="tbody-td">Rs {{data.discountAmount.toLocaleString()}}</td>
-            </tbody>
+      <tbody>
+        <td class="tbody-td">Discount</td>
+        <td></td>
+        <td></td>
+        <td class="tbody-td">Rs {{data.discountAmount.toLocaleString()}}</td>
+      </tbody>
 
-            <tbody>
-                <td class="tbody-td">Tax</td>
-                <td></td>
-                <td></td>
-                <td class="tbody-td">{{data.tax}} %</td>
-            </tbody>
+      <tbody>
+        <td class="tbody-td">Tax</td>
+        <td></td>
+        <td></td>
+        <td class="tbody-td">{{data.tax}} %</td>
+      </tbody>
 
-            <tbody>
-                <td class="tbody-td">Net Price</td>
-                <td></td>
-                <td></td>
-                <td class="tbody-td">Rs {{data.netPrice.toLocaleString()}}</td>
-            </tbody>
-        </table>
-
-
-
-    </div>
-
+      <tbody>
+        <td class="tbody-td">Net Price</td>
+        <td></td>
+        <td></td>
+        <td class="tbody-td">Rs {{data.netPrice.toLocaleString()}}</td>
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-button (click)="order()" color="primary" mat-dialog-close cdkFocusInitial>Order</button>
+  <button
+    mat-button
+    mat-dialog-close
+  >Close</button>
+  <button
+    mat-button
+    (click)="order()"
+    color="primary"
+    mat-dialog-close
+    cdkFocusInitial
+  >Order</button>
 </div>

@@ -221,7 +221,7 @@ export class MenuListComponent implements OnInit {
   }
 
   viewOrderSummary() {
-    const dialogRef = this.dialog.open(OrderSummaryComponent, {
+    this.dialog.open(OrderSummaryComponent, {
       width: this.mobileQuery.matches ? '100%' : '50%',
       data: {
         menuItems: this.menuItems,

@@ -19,7 +19,7 @@ import { ApiService } from 'src/services/api.service';
   templateUrl: './menu-categories.component.html',
   styleUrls: ['./menu-categories.component.scss'],
 })
-export class MenuCategoriesComponent implements OnInit, AfterContentChecked,OnDestroy {
+export class MenuCategoriesComponent implements OnInit, AfterContentChecked, OnDestroy {
   allMenuItems!: ItemList[];
   mainCoursesItems!: ItemList[];
   pagedMainCoursesItems!: ItemList[];
@@ -37,7 +37,7 @@ export class MenuCategoriesComponent implements OnInit, AfterContentChecked,OnDe
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getItems();
