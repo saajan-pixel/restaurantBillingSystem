@@ -66,15 +66,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "restaurant-bill-system:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "src/proxy.conf.json",
+            "buildTarget": "restaurant-bill-system:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "restaurantBillSystem:build:production"
+              "buildTarget": "restaurantBillSystem:build:production"
             },
             "development": {
-              "browserTarget": "restaurantBillSystem:build:development"
+              "buildTarget": "restaurantBillSystem:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "restaurantBillSystem:build"
+            "buildTarget": "restaurantBillSystem:build"
           }
         },
         "test": {
@@ -129,7 +129,7 @@
           "defaultConfiguration": "production"
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
               "browserTarget": "restaurantBillSystem:build:development",
@@ -143,7 +143,7 @@
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/"
